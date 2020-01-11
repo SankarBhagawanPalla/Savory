@@ -22,7 +22,7 @@ class UnitOfMeasureRepositoryIT {
 
     @Test
     void findByDescription() {
-
+        System.out.println("#######################################################");
         Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
         assertEquals("Teaspoon", uomOptional.get().getDescription());
     }
