@@ -13,8 +13,7 @@ import  static org.springframework.test.web.servlet.request.MockMvcRequestBuilde
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 class RecipeControllerTest {
 
@@ -38,6 +37,7 @@ class RecipeControllerTest {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
         mockMvc.perform(get("/recipe/show/1"))
                 .andExpect(status().isOk())
+                .andExpect(model().attributeExists("recipe"))
                 .andExpect(view().name("recipe/show"));
 
     }
