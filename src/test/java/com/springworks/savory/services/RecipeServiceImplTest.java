@@ -1,5 +1,7 @@
 package com.springworks.savory.services;
 
+import com.springworks.savory.converters.RecipeCommandToRecipe;
+import com.springworks.savory.converters.RecipeToRecipeCommand;
 import com.springworks.savory.domain.Recipe;
 import com.springworks.savory.repositories.RecipeRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,12 +21,17 @@ class RecipeServiceImplTest {
     RecipeServiceImpl recipeService;
     @Mock
     RecipeRepository recipeRepository;
+    @Mock
+    RecipeToRecipeCommand recipeToRecipeCommand;
+
+    @Mock
+    RecipeCommandToRecipe recipeCommandToRecipe;
 
     @BeforeEach
     void setUp() {
 
         MockitoAnnotations.initMocks(this);
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
     @Test
