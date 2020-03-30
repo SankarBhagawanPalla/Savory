@@ -2,6 +2,8 @@ package com.springworks.savory.controllers;
 
 
 import com.springworks.savory.commands.IngredientCommand;
+import com.springworks.savory.commands.RecipeCommand;
+import com.springworks.savory.commands.UnitOfMeasureCommand;
 import com.springworks.savory.services.IngredientService;
 import com.springworks.savory.services.RecipeService;
 import com.springworks.savory.services.UnitOfMeasureService;
@@ -51,6 +53,22 @@ public class IngredientController {
         model.addAttribute("uomList", unitOfMeasureService.listofAllUoms());
         return "recipe/ingredient/ingredientform";
 
+    }
+
+    @GetMapping
+    @RequestMapping("recipe/{recipeId}/ingredient/new")
+    public String newRecipe(@PathVariable String recipeId, Model model){
+
+        RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+
+        model.addAttribute("ingredient", ingredientCommand);
+        ingredientCommand.setUnitOfMeasure(new UnitOfMeasureCommand());
+
+        model.addAttribute("uomList", unitOfMeasureService.listofAllUoms());
+        return "recipe/ingredient/ingredientform";
     }
 
     @PostMapping
