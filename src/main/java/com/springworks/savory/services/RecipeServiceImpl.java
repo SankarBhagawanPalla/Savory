@@ -4,6 +4,7 @@ import com.springworks.savory.commands.RecipeCommand;
 import com.springworks.savory.converters.RecipeCommandToRecipe;
 import com.springworks.savory.converters.RecipeToRecipeCommand;
 import com.springworks.savory.domain.Recipe;
+import com.springworks.savory.exceptions.NotFoundException;
 import com.springworks.savory.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,8 @@ public class RecipeServiceImpl implements RecipeService {
 
         Optional<Recipe> recipe = recipeRepository.findById(id);
         if(!recipe.isPresent()){
-            throw new RuntimeException("Recipe Not Found!");
+            //throw new RuntimeException("Recipe Not Found!");
+            throw new NotFoundException("Recipe Not Found!");
         }
         return recipe.get();
     }
